@@ -1,2 +1,3 @@
 #!/bin/bash
-gcc -E  -o c
+CFILE = %(<main.c)
+gcc -E $CFILE  -o c
