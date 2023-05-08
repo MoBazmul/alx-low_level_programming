@@ -3,6 +3,7 @@
 /*
  * this function reads a text file and and
  * prints it to the POSIX standard output
+ *
  */
 
 ssize_t read_textfile(const char *filename, size_t letters)
@@ -18,8 +19,8 @@ ssize_t read_textfile(const char *filename, size_t letters)
 		return (0);
 
 	fd = open(filename, O_RDONLY);
-	read_fd  = read(o, buffer, letters);
-	write_fd = write(STDOUT_FILENO, buffer, r);
+	read_fd  = read(fd, buffer, letters);
+	write_fd = write(STDOUT_FILENO, buffer, read_fd);
 
 	if (fd == -1 || read_fd == -1 || write_fd == -1 || write_fd != read_fd)
 	{
