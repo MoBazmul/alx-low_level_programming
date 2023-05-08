@@ -7,28 +7,29 @@
 
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	ssize_t fd, read_size, write_size;
-	char buffer = (char*) calloc(letters, sizeof(char));
+	ssize_t fd, read_fd, write_fd;
+	char *buffer;
 
-	fd = open(filename, O_RDONLY | O_CREAT);
-	if ((fd < 0) | (fd == NULL)) {
-		perror("r1");
+	if (filename == NULL)
 		return (0);
-	}
-	
-	read_size = read(fd, buffer, letters);
-	if (read_size == -1) {
+
+	buffer = (char *) calloc(letters, sizeof(letters));
+	if (buffer == NULL)
+		return (0);
+
+	fd = open(filename, O_RDONLY);
+	read_fd  = read(o, buffer, letters);
+	write_fd = write(STDOUT_FILENO, buffer, r);
+
+	if (fd == -1 || read_fd == -1 || write_fd == -1 || write_fd != read_fd)
+	{
 		free(buffer);
 		return (0);
 	}
 
-	write_size = write(STDOUT_FILENO, buffer, read_size);
-	if (write_size < 0) {
-		free(buffer);
-		return (0);
-	}
-	return (write_size);
-	
+	free(buffer);
 	close(fd);
+
+	return (write_fd);
 }
 
